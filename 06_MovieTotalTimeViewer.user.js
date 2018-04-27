@@ -1,15 +1,16 @@
 // ==UserScript==
-// @name		NYIM Series 06 - Movie TotalTime Viewer
-// @description	単元にかかる時間を推測可能にするやつ。
-// @author		yanorei32
+// @name        NIM Series 06 - Movie TotalTime Viewer
+// @description 単元にかかる時間を推測可能にするやつ。
+// @author      yanorei32
 // @supportURL  https://twitter.com/yanorei32
-// @namespace	http://tyan0.dip.jp/~rei/
+// @namespace   http://tyan0.dip.jp/~rei/
 // @website     http://tyan0.dip.jp/~rei/
-// @include		https://www.nnn.ed.nico/courses/*/chapters/*
+// @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
-// @version		0.1
-// @grant		none
-// @license		MIT License
+// @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/06_MovieTotalTimeViewer.user.js
+// @version     0.1
+// @grant       none
+// @license     MIT License
 // @run-at      document-end
 // ==/UserScript==
 
