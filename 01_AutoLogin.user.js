@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name		NIM Series 01 - Auto Login
+// @name        NIM Series 01 - Auto Login
 // @description ホームページに飛んだ時にクリックが必要っておかしくないですか？  :thinking:
 // @author      yanorei32
 // @supportURL  https://twitter.com/yanorei32
