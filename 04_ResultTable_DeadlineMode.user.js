@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        NIM Series 04 - Result Table - Deadline Mode
-// @description 期日が分かりやすい表を作ってみた！
+// @description 期日ベースの表に変更するもの。
 // @author      yanorei32
 // @supportURL  https://github.com/Yanorei32/nnn-improved/issues
 // @namespace   http://tyan0.dip.jp/~rei/
@@ -8,7 +8,7 @@
 // @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     0.2
+// @version     0.3
 // @grant       none
 // @license     MIT License
 // @run-at      document-end

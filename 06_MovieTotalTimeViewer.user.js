@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        NIM Series 06 - Movie TotalTime Viewer
-// @description 単元にかかる時間を推測可能にするやつ。
+// @description 単元の動画再生時間を表示するもの。
 // @author      yanorei32
 // @supportURL  https://github.com/Yanorei32/nnn-improved/issues
 // @namespace   http://tyan0.dip.jp/~rei/
@@ -8,7 +8,7 @@
 // @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/06_MovieTotalTimeViewer.user.js
-// @version     0.2
+// @version     1.0
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
