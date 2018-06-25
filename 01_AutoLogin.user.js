@@ -7,14 +7,16 @@
 // @website     http://tyan0.dip.jp/~rei/
 // @include     https://www.nnn.ed.nico/
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/01_AutoLogin.user.js
-// @version     1.0
+// @version     1.1
 // @grant       none
 // @license     MIT License
 // @run-at      document-start
 // ==/UserScript==
 
-(function() {
+(() => {
     'use strict';
+
     location.href = '/oauth_login';
+
 })();
 

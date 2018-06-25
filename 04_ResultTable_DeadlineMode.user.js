@@ -8,13 +8,13 @@
 // @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     0.3
+// @version     0.4
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
 // ==/UserScript==
 
-(function() {
+(() => {
     let clearDeadLineMode = () => {
         // clear
         $('#change_to_dead_line_mode').prop('style', 'display:inline');
