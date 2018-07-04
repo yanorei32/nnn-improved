@@ -39,7 +39,7 @@
     };
 
     let totalMovieTime = 0;
-    $('.movie > a > .movie-length').each((i, e) => {
+    $('.movie .movie-length').each((i, e) => {
         totalMovieTime += txt2sec(e.textContent);
     });
 
@@ -48,7 +48,7 @@
 
         let playedMovieTime = 0;
 
-        $('.movie.good > a > .movie-length').each((i, e) => {
+        $('.movie.good .movie-length').each((i, e) => {
             playedMovieTime += txt2sec(e.textContent);
         });
 
