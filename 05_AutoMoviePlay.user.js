@@ -8,7 +8,7 @@
 // @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/05_AutoMoviePlay.user.js
-// @version     1.3
+// @version     1.4
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -38,7 +38,7 @@
                     element.find('.typo-list-item-title').eq(0).click();
 
             }, 500);
-        }, this
+        }
     ).insertBefore('.u-progress');
 
     stopAutoPlayButton = $(
@@ -50,7 +50,7 @@
         'click', () => {
             statusApplyToElementDisplay(false);
             clearInterval(intervalId);
-        }, this
+        }
     ).insertBefore('.u-progress');
 
 })();
