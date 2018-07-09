@@ -19,7 +19,12 @@
     'use strict';
 
     let getReferenceCharacterCountByJapaneseText = (japaneseText) => {
-        let referenceCharacterCountJapaneseText = japaneseText.match(/\d+字/)[0];
+        let referenceCharacterCountJapaneseTexts = japaneseText.match(/\d+字/g);
+
+        if(referenceCharacterCountJapaneseTexts === null)
+            return -1;
+
+        let referenceCharacterCountJapaneseText = referenceCharacterCountJapaneseTexts[0];
 
         if(referenceCharacterCountJapaneseText === undefined)
             return -1;
