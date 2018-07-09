@@ -9,7 +9,7 @@
 // @include     https://www.nnn.ed.nico/contents/courses/*/chapters/*/essay_reports/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/10_CharacterCounter.user.js
-// @version     1.0
+// @version     1.1
 // @grant       none
 // @license     MIT License
 // @run-at      document-idle
