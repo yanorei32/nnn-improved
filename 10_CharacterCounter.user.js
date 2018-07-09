@@ -6,9 +6,10 @@
 // @namespace   http://tyan0.dip.jp/~rei/
 // @website     http://tyan0.dip.jp/~rei/
 // @include     https://www.nnn.ed.nico/contents/courses/*/chapters/*/essay_tests/*
+// @include     https://www.nnn.ed.nico/contents/courses/*/chapters/*/essay_reports/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/10_CharacterCounter.user.js
-// @version     0.1
+// @version     1.0
 // @grant       none
 // @license     MIT License
 // @run-at      document-idle
