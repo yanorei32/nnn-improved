@@ -8,7 +8,7 @@
 // @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     1.0
+// @version     1.1
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -89,14 +89,14 @@
                 $(`.deadline_result_table .subject_2st_row:eq(${i*2+1}) > .report_progress:eq(${k})`)[0].colSpan = span;
                 j += span;
             }
-      
+
             // trim
             if (progressCount[i].length != 0)
                 for (let l = 0; l < 15-progressCount[i].length-(15-allSpan); l++) {
                     $(`.deadline_result_table .subject_1st_row:eq(${i}) > .report_limit_date`).last().remove();
                     $(`.deadline_result_table .subject_2st_row:eq(${i*2}) > .report_progress`).last().remove();
                     $(`.deadline_result_table .subject_2st_row:eq(${i*2+1}) > .report_progress`).last().remove();
-                }            
+                }
         });
 
         $('.deadline_result_table .report_limit_date:nth-child(even)').css({
@@ -109,7 +109,7 @@
             'background-color': 'rgb(249, 255, 250)',
         });
 
-        $('#change_to_dead_line_mode, #change_to_default_mode, #result_table').toggle();        
+        $('#change_to_dead_line_mode, #change_to_default_mode, #result_table').toggle();
         $('.deadline_result_table').show();
     }
 

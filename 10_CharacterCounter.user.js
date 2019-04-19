@@ -9,34 +9,34 @@
 // @include     https://www.nnn.ed.nico/contents/courses/*/chapters/*/essay_reports/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/10_CharacterCounter.user.js
-// @version     1.1
+// @version     1.2
 // @grant       none
 // @license     MIT License
 // @run-at      document-idle
 // ==/UserScript==
 
-(() => {
+(function() {
     'use strict';
 
-    let getReferenceCharacterCountByJapaneseText = (japaneseText) => {
-        let referenceCharacterCountJapaneseTexts = japaneseText.match(/\d+字/g);
+    const getReferenceCharacterCountByJapaneseText = (japaneseText) => {
+        const referenceCharacterCountJapaneseTexts = japaneseText.match(/\d+字/g);
 
         if(referenceCharacterCountJapaneseTexts === null)
             return -1;
 
-        let referenceCharacterCountJapaneseText = referenceCharacterCountJapaneseTexts[0];
+        const referenceCharacterCountJapaneseText = referenceCharacterCountJapaneseTexts[0];
 
         if(referenceCharacterCountJapaneseText === undefined)
             return -1;
 
-        let referenceCharacterCount = parseInt(referenceCharacterCountJapaneseText.slice(0, -1));
+        const referenceCharacterCount = parseInt(referenceCharacterCountJapaneseText.slice(0, -1));
 
         return referenceCharacterCount;
     };
 
-    let apply2counter = (characterCounterElement, answerTextAreaElement, referenceCharacterCount) => {
-        let referenceCharacterCountMargin = referenceCharacterCount * 0.1;
-        let answerTextAreaCharacterCount = answerTextAreaElement.val().length;
+    const apply2counter = (characterCounterElement, answerTextAreaElement, referenceCharacterCount) => {
+        const referenceCharacterCountMargin = referenceCharacterCount * 0.1;
+        const answerTextAreaCharacterCount = answerTextAreaElement.val().length;
 
         if(answerTextAreaCharacterCount + referenceCharacterCountMargin < referenceCharacterCount)
             characterCounterElement.css({'color': 'blue'});
@@ -55,16 +55,16 @@
     }).appendTo('body');
 
     $('li.exercise-item.type-descriptive').each((_, exerciseElement) => {
-        let referenceCharacterCount = getReferenceCharacterCountByJapaneseText(
+        const referenceCharacterCount = getReferenceCharacterCountByJapaneseText(
             $(exerciseElement).find('.question').eq(0).text()
         );
 
         if(referenceCharacterCount === -1)
             return true;
 
-        let answerTextAreaElement = $(exerciseElement).find('.answers').eq(0);
+        const answerTextAreaElement = $(exerciseElement).find('.answers').eq(0);
 
-        let characterCounterElement = $('<div>', {
+        const characterCounterElement = $('<div>', {
             'class': 'nim_series_character_counter_element',
         }).insertBefore(answerTextAreaElement);
 

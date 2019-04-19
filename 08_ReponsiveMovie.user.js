@@ -8,16 +8,16 @@
 // @include     https://ww3.tokyo-shoseki.co.jp/api/dwango/requestContents.php?*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/08_ReponsiveMovie.user.js
-// @version     0.3
+// @version     0.4
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
 // ==/UserScript==
 
-(() => {
+(function() {
     'use strict';
 
-    let videoContents = $('#video01');
+    const videoContents = $('#video01');
 
     if(videoContents !== null){
         videoContents.height(undefined).width(undefined).css({
@@ -28,7 +28,6 @@
         $('<style>', {
             html: 'body { background-color: gray; overflow: hidden; margin: 0; }'
         }).appendTo('body');
-
     }
 })();
 

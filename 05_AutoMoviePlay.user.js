@@ -8,7 +8,7 @@
 // @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/05_AutoMoviePlay.user.js
-// @version     2.1
+// @version     2.2
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -60,3 +60,4 @@
     ).insertBefore('.u-progress');
 
 })();
+

@@ -7,16 +7,16 @@
 // @website     http://tyan0.dip.jp/~rei/
 // @include     https://www.nnn.ed.nico/*
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/09_NotFoundBugFixer.user.js
-// @version     0.1
+// @version     0.2
 // @grant       none
 // @license     MIT License
 // @run-at      document-idle
 // ==/UserScript==
 
-(() => {
+(function() {
     'use strict';
 
-    let loginButton = document.querySelector('.login > div.u-button-wrapper > a.u-button');
+    const loginButton = document.querySelector('.login > div.u-button-wrapper > a.u-button');
 
     if(loginButton === null)
         return;
@@ -24,8 +24,8 @@
     if(loginButton.href.match(/notfound/) === null)
         return;
 
-    let encodedURI = encodeURIComponent(location.href);
-    let loginBaseURI = 'https://www.nnn.ed.nico/oauth_login?next_url=';
+    const encodedURI = encodeURIComponent(location.href);
+    const loginBaseURI = 'https://www.nnn.ed.nico/oauth_login?next_url=';
 
     loginButton.href = loginBaseURI + encodedURI;
 

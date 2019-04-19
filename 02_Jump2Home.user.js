@@ -8,16 +8,11 @@
 // @include     https://www.nnn.ed.nico/*
 // @exclude     https://www.nnn.ed.nico/contents/*
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/02_Jump2Home.user.js
-// @version     1.1
+// @version     1.2
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
 // ==/UserScript==
 
-(() => {
-    'use strict';
-
-    document.querySelector('.ny-ci > a').href = '/home';
-
-})();
+document.querySelector('.ny-ci > a').href = '/home';
 
