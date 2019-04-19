@@ -1,6 +1,6 @@
 # NIM Series
 
-## What's is this
+## What is this
 This project was made to improve nnn.ed.jp and nnn.ed.nico sites.
 
 ## How to use
