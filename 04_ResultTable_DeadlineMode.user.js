@@ -8,99 +8,124 @@
 // @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     0.4
+// @version     1.0
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
 // ==/UserScript==
 
-(() => {
-    let clearDeadLineMode = () => {
-        // clear
-        $('#change_to_dead_line_mode').prop('style', 'display:inline');
-        $('#change_to_default_mode').prop('style', 'display:none');
-
-        $('#result_table_deadline_mode_css').remove();
-        $('.report_progress, .report_limit_date').each((i, e) => e.colSpan = 0);
-
+(function() {
+    const clearDeadLineMode = () => {
+        $('#change_to_dead_line_mode, #change_to_default_mode, #result_table').toggle();
+        $('.deadline_result_table').remove();
     };
 
-    let deadLineMode = () => {
-        $('#change_to_dead_line_mode').prop('style', 'display:none');
-        $('#change_to_default_mode').prop('style', 'display:inline');
+    const deadLineMode = () => {
+        $('#result_table')
+            .clone()
+            .addClass('deadline_result_table')
+            .hide()
+            .insertAfter('#result_table');
 
-        // write CSS
-        $('<style>', {
-            html:
-                'tr.subject_1st_row > td.report_limit_date:nth-child(even) {' +
-                    'background-color : rgb(219, 245, 254);' +
-                '}' +
-                'tr.subject_1st_row > td.report_limit_date:nth-child(odd) {' +
-                    'background-color : rgb(219, 254, 240);' +
-                '}' +
-                'tr.subject_2st_row > td.report_progress {' +
-                    'background-color : rgb(249, 255, 250);' +
-                '}',
-            id: 'result_table_deadline_mode_css',
-        }).appendTo('body');
+        const colSpan = {};
+        const progressCount = [];
+        $('.deadline_result_table .subject_1st_row').each((i, row) => {
+            const rowSpan = {};
+            progressCount[i] = [];
 
-        let removeSpacesByDateString = (dateStr) => {
-            return dateStr.replace(/[^0-9\/]/g, '');
-        };
-
-        let dateToUnixTime = (dateStr) => {
-            return new Date('2000/' + removeSpacesByDateString(dateStr)).getTime()
-        };
-
-
-        let subjectCount = $('.subject_1st_row').length;
-        let reportCount = $('.header_report_number').length;
-        let subjectShiftCount = new Array(subjectCount).fill(0);
-
-        for(let reportIndex = 0; reportIndex < reportCount; ++reportIndex){
-            let tdlist = [];
-
-            for(let subjectIndex = 0; subjectIndex < subjectCount; ++subjectIndex){
-                tdlist.push(
-                    $(`tr.subject_1st_row:nth-child(${(subjectIndex+1)*3}) > td.report_limit_date:nth-child(${4 + reportIndex - subjectShiftCount[subjectIndex]})`)[0]
-                )
-            }
-
-            let minUnixTimeOfReportLimitDate = Math.min.apply(
-                null,
-                tdlist.map((td) => dateToUnixTime(td.innerHTML))
-            );
-
-            Object.keys(tdlist).map((v) => parseInt(v)).forEach((subjectIndex) => {
-                let tdOfDeadline = tdlist[subjectIndex];
-                if(minUnixTimeOfReportLimitDate == dateToUnixTime(tdOfDeadline.innerHTML)) return;
-
-                tdOfDeadline.colSpan++;
-                // progress
-                $(`tr.subject_2st_row:nth-child(${(subjectIndex+1)*3+1}) > td.report_progress:nth-child(${2 + reportIndex - subjectShiftCount[subjectIndex]})`)[0].colSpan++;
-                // point
-                $(`tr.subject_2st_row:nth-child(${(subjectIndex+1)*3+2}) > td.report_progress:nth-child(${2 + reportIndex - subjectShiftCount[subjectIndex]})`)[0].colSpan++;
-
-                subjectShiftCount[subjectIndex]++;
-
+            $(row).children('.report_limit_date').each((j, date) => {
+                const key = $.trim($(date).text());
+                if (key !== "-")
+                    if (rowSpan[key]) {
+                        rowSpan[key] = rowSpan[key]+1;
+                        $(date).remove();
+                    } else
+                        rowSpan[key] = 1;
             });
+            for (const key in rowSpan) {
+                if (!colSpan[key])
+                    colSpan[key] = 0;
+
+                colSpan[key] = Math.max(colSpan[key], rowSpan[key]);
+
+                for (let k = 0; k < rowSpan[key]; k++)
+                    progressCount[i].push(rowSpan[key]);
+            }
+        });
+
+        let allSpan = 0;
+        for (const key in colSpan)
+            allSpan += colSpan[key];
+
+        const getSpan = (start, end) => {
+            let span = 0;
+            let startSpan = 0;
+            for (const key in colSpan) {
+                span += colSpan[key];
+                if (key == start)
+                    startSpan = span;
+                if (key == end)
+                    return span - startSpan;
+            }
         }
+
+        $('.deadline_result_table .subject_1st_row').each((i, row1) => {
+            let prev;
+            let spans = [];
+            $(row1).children('.report_limit_date').each((j, date) => {
+                const text = $.trim($(date).text());
+                const span = getSpan(prev, text);
+                date.colSpan = span;
+                prev = text;
+
+                for (let k = 0; k < span; k++)
+                    spans.push(span);
+            });
+
+            let j = 0;
+            for (let k = 0; k < progressCount[i].length; k++) {
+                const span = spans[j]/progressCount[i][k];
+                $(`.deadline_result_table .subject_2st_row:eq(${i*2}) > .report_progress:eq(${k})`)[0].colSpan = span;
+                $(`.deadline_result_table .subject_2st_row:eq(${i*2+1}) > .report_progress:eq(${k})`)[0].colSpan = span;
+                j += span;
+            }
+      
+            // trim
+            if (progressCount[i].length != 0)
+                for (let l = 0; l < 15-progressCount[i].length-(15-allSpan); l++) {
+                    $(`.deadline_result_table .subject_1st_row:eq(${i}) > .report_limit_date`).last().remove();
+                    $(`.deadline_result_table .subject_2st_row:eq(${i*2}) > .report_progress`).last().remove();
+                    $(`.deadline_result_table .subject_2st_row:eq(${i*2+1}) > .report_progress`).last().remove();
+                }            
+        });
+
+        $('.deadline_result_table .report_limit_date:nth-child(even)').css({
+            'background-color': 'rgb(219, 245, 254)',
+        });
+        $('.deadline_result_table .report_limit_date:nth-child(odd)').css({
+            'background-color': 'rgb(219, 254, 240)',
+        });
+        $('.deadline_result_table .report_progress').css({
+            'background-color': 'rgb(249, 255, 250)',
+        });
+
+        $('#change_to_dead_line_mode, #change_to_default_mode, #result_table').toggle();        
+        $('.deadline_result_table').show();
     }
 
-    $('<button>', {
-        text: 'dead line mode',
-        id: 'change_to_dead_line_mode',
-    }).on(
-        'click', deadLineMode
-    ).insertBefore('#result_table');
+        $('<button>', {
+            text: 'dead line mode',
+            id: 'change_to_dead_line_mode',
+        }).on(
+            'click', deadLineMode
+        ).insertBefore('#result_table');
 
-    $('<button>', {
-        text: 'default mode',
-        id: 'change_to_default_mode',
-        style: 'display:none',
-    }).on(
-        'click', clearDeadLineMode
-    ).insertBefore('#result_table');
-
+        $('<button>', {
+            text: 'default mode',
+            id: 'change_to_default_mode',
+            style: 'display:none',
+        }).on(
+            'click', clearDeadLineMode
+        ).insertBefore('#result_table');
 })();
 
