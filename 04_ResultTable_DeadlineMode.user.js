@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name        NIM Series 04 - Result Table - Deadline Mode
 // @description 期日ベースの表に変更するもの。
-// @author      yanorei32
+// @author      sjcl
 // @supportURL  https://github.com/Yanorei32/nnn-improved/issues
-// @namespace   http://tyan0.dip.jp/~rei/
-// @website     http://tyan0.dip.jp/~rei/
+// @namespace   https://github.com/sjcl
+// @website     https://github.com/sjcl
 // @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     1.1
+// @version     1.2
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
