@@ -8,7 +8,7 @@
 // @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/06_MovieTotalTimeViewer.user.js
-// @version     1.3
+// @version     1.4
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -56,7 +56,7 @@
 
         $('.u-list li:not(.good)').each((i, e) => {
             if($(e).hasClass('movie'))
-               autoPlayableTime += txt2sec(e.textContent);
+               autoPlayableTime += txt2sec(e.getElementsByClassName('movie-length')[0].textContent);
             else
                 return false;
         });
