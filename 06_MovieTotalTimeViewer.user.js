@@ -8,7 +8,7 @@
 // @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/06_MovieTotalTimeViewer.user.js
-// @version     1.2
+// @version     1.3
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -52,7 +52,16 @@
             playedMovieTime += txt2sec(e.textContent);
         });
 
-        const timeText = `${sec2txt(playedMovieTime)} / ${sec2txt(totalMovieTime)} (${sec2txt(totalMovieTime-playedMovieTime)})`;
+        let autoPlayableTime = 0;
+
+        $('.u-list li:not(.good)').each((i, e) => {
+            if($(e).hasClass('movie'))
+               autoPlayableTime += txt2sec(e.textContent);
+            else
+                return false;
+        });
+
+        const timeText = `${sec2txt(playedMovieTime)} / ${sec2txt(totalMovieTime)} (${sec2txt(autoPlayableTime)} / ${sec2txt(totalMovieTime-playedMovieTime)})`;
 
         progressLabel.innerHTML = `${timeText} - ${progressLabel.innerHTML}`;
 
