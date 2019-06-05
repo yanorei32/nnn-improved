@@ -8,7 +8,7 @@
 // @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     1.2
+// @version     1.3
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -29,6 +29,21 @@
 
         const colSpan = {};
         const progressCount = [];
+
+        $('.deadline_result_table .report_progress').each((i, e) => {
+            const progress = (e = $(e)).text();
+
+            if (!progress.match(/\d+%/)) return;
+
+            e.append($(
+                '<div>',
+                {
+                    style: `width: ${progress}; background-color: ${parseInt(progress) == 100 ? 'yellowgreen' : 'greenyellow'}; line-height: 75%;`,
+                    html: '&nbsp;',
+                },
+            ));
+        });
+
         $('.deadline_result_table .subject_1st_row').each((i, row) => {
             const rowSpan = {};
             progressCount[i] = [];
