@@ -8,7 +8,7 @@
 // @include     https://www.nnn.ed.nico/courses/*/chapters/*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/05_AutoMoviePlay.user.js
-// @version     2.2
+// @version     3.0
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
@@ -20,12 +20,24 @@
 
     let intervalId = undefined;
     let autoPlayButton, stopAutoPlayButton;
+    let lastTitle;
+    let lastClickedTitle;
+    const titleElement = document.getElementsByTagName('title')[0];
 
     const statusApplyToElementDisplay = (isAutoPlaying) => {
         stopAutoPlayButton.css('display', isAutoPlaying ? 'inline' : 'none');
         autoPlayButton.css('display', isAutoPlaying ? 'none' : 'inline');
     };
 
+    const notification = (text) => {
+        if(Notification.permission === "denied")
+            return;
+
+        if(Notification.permission !== "granted")
+            Notification.requestPermission((_) => {notification(text)});
+        else
+            new Notification(text);
+    };
     autoPlayButton = $(
         '<button>',
         { text: 'Auto Play' }
@@ -34,16 +46,20 @@
             statusApplyToElementDisplay(true);
 
             intervalId = setInterval(() => {
-                const element = $('.u-list > li:not(.good) > a:not(.is-gate-closed):not(.is-selected)');
+                const element = $('.u-list > li:not(.good) > a:not(.is-gate-closed)');
 
                 if(element.length !== 0){
-                    element.find('.typo-list-item-title').eq(0).click();
+                    const itemTitleElem = element.find('.typo-list-item-title').eq(0);
+                    itemTitleElem.click();
 
-                    if(!element.parent().hasClass('movie') && WITH_REPORT_DETECTED_ALERT)
-                        alert('Report detected.');
+                    if(itemTitleElem.text() != lastClickedTitle && !element.parent().hasClass('movie') && WITH_REPORT_DETECTED_ALERT) {
+                        notification(itemTitleElem.text())
+                        alert(itemTitleElem.text());
+                        lastClickedTitle = itemTitleElem.text();
+                    }
                 }
 
-            }, 500);
+            }, 3000);
         }
     ).insertBefore('.u-progress');
 
