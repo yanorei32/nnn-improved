@@ -13,5 +13,5 @@
 // @run-at      document-start
 // ==/UserScript==
 
-location.href = '/oauth_login';
+location.href = '/login';
 
