@@ -7,7 +7,7 @@
 // @website     http://tyan0.dip.jp/~rei/
 // @include     https://www.nnn.ed.nico/
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/01_AutoLogin.user.js
-// @version     1.2
+// @version     1.3
 // @grant       none
 // @license     MIT License
 // @run-at      document-start
