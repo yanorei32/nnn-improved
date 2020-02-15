@@ -5,10 +5,10 @@
 // @supportURL  https://github.com/Yanorei32/nnn-improved/issues
 // @namespace   https://github.com/sjcl
 // @website     https://github.com/sjcl
-// @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index?studentTermId=*
+// @include     https://secure.nnn.ed.jp/mypage/result/pc/list/index*
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
 // @updateURL   https://github.com/Yanorei32/nnn-improved/raw/master/04_ResultTable_DeadlineMode.user.js
-// @version     1.3
+// @version     1.4
 // @grant       none
 // @license     MIT License
 // @run-at      document-end
