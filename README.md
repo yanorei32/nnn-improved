@@ -4,7 +4,7 @@
 This project was made to improve nnn.ed.jp and nnn.ed.nico sites.
 
 ## How to use
-1. Install Tampermonkey to your browser.
+1. Install [Tampermonkey](https://www.tampermonkey.net/) to your browser.
 1. Download this repository in zip.
 1. Click Tampermonkey Dashboard -> Utilities -> Zip -> Import.
 1. Select downloaded this repository zip file.
