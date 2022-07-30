@@ -10,3 +10,6 @@ This project was made to improve nnn.ed.jp and nnn.ed.nico sites.
 1. Select downloaded this repository zip file.
 1. Enjoy !
 
+## Additional note
+
+![image](https://user-images.githubusercontent.com/11992915/181904092-526c9b63-2e71-428d-b0bc-134743fb5a43.png)
